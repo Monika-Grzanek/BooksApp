@@ -17,11 +17,12 @@ const templates = {
   templateBook: Handlebars.compile(document.querySelector(select.templateOf.templateBook).innerHTML),
 };
     
-const listBook = document.querySelector(select.listOf.list);
+//const listBook = document.querySelector(select.listOf.list);
 //const coverBooks = listBook.querySelectorAll(select.image.coverImage);
 //const favoriteCoverBook = select.image.favoriteCoverImage;
 
 function render(){
+  const listBook = document.querySelector(select.listOf.list);
   for(let item of dataSource.books){
     const book = templates.templateBook(item);
     const bookDom = utils.createDOMFromHTML(book);
@@ -33,22 +34,26 @@ function render(){
 render();
 
 function initActions(){
-  const coverBooks = listBook.querySelectorAll(select.image.coverImage);
-  const favoriteCoverBook = select.image.favoriteCoverImage;
+  const listBook = document.querySelector('.books-list');
+  //const listBook = document.querySelector(select.listOf.list);
+  //const coverBooks = listBook.querySelectorAll(select.image.coverImage);
+  //const favoriteCoverBook = select.image.favoriteCoverImage;
+  const coverBooks = listBook.querySelectorAll('.book__image');
+  const favoriteCoverBook = 'favorite';
 
   const favoriteBooks = [];
   for(let cover of coverBooks){
-    const coverDataId = cover.getAttribute('data-id');
     cover.addEventListener('dblclick', function(event){
       event.preventDefault();
-      const bookIndex = favoriteBooks.indexOf(coverDataId);
-      if(!favoriteBooks[bookIndex]){
+      const coverDataId = cover.getAttribute('data-id');
+      if(!cover.classList.contains(favoriteCoverBook)){
         favoriteBooks.push(coverDataId);
         cover.classList.add(favoriteCoverBook);
       } else {
+        const bookIndex = favoriteBooks.indexOf(coverDataId);
         favoriteBooks.splice(bookIndex, 1);
         cover.classList.remove(favoriteCoverBook);
-      }
+      } 
     });
   }
   console.log('show favoriteBooks', favoriteBooks);
