@@ -9,7 +9,7 @@ const select = {
   },
   image: {
     coverImage: '.book__image',
-    favoriteCoverImage: '.favorite',
+    favoriteCoverImage: 'favorite',
   },
 };
 
@@ -18,8 +18,7 @@ const templates = {
 };
     
 const listBook = document.querySelector(select.listOf.list);
-//const coverBooks = listBook.querySelectorAll(select.image.coverImage);
-//const favoriteCoverBook = select.image.favoriteCoverImage;
+const favoriteCoverBook = select.image.favoriteCoverImage;
 
 function render(){
   //const listBook = document.querySelector(select.listOf.list);
@@ -57,12 +56,12 @@ function determineRatingBgc(rating) {
 render();
 
 function initActions(){
-  const listBook = document.querySelector('.books-list');
+  //const listBook = document.querySelector('.books-list');
   //const listBook = document.querySelector(select.listOf.list);
   //const coverBooks = listBook.querySelectorAll(select.image.coverImage);
   //const favoriteCoverBook = select.image.favoriteCoverImage;
   //const coverBooks = listBook.querySelectorAll('.book__image');
-  const favoriteCoverBook = 'favorite';
+  //const favoriteCoverBook = 'favorite';
 
   const favoriteBooks = [];
   //for(let cover of coverBooks){
@@ -117,9 +116,9 @@ function filterBooks() {
     }
     const coverBooks = listBook.querySelector('.book__image[data-id="' + item.id + '"]');
     if(shouldBeHidden){
-      coverBooks.classList.add('.hidden');
+      coverBooks.classList.add('hidden');
     } else {
-      coverBooks.classList.remove('.hidden');
+      coverBooks.classList.remove('hidden');
     }
     console.log('show coverBooks', coverBooks);
   }
