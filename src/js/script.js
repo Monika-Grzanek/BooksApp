@@ -24,12 +24,35 @@ const listBook = document.querySelector(select.listOf.list);
 function render(){
   //const listBook = document.querySelector(select.listOf.list);
   for(let item of dataSource.books){
+    const ratingBgc = determineRatingBgc(item.rating);
+    const ratingWidth = item.rating * 10;
+    console.log('ratingBgc', ratingBgc);
+    console.log('ratingWidth', ratingWidth);
+    item['ratingBgc'] = ratingBgc;
+    item['ratingWidth'] = ratingWidth;
+
     const book = templates.templateBook(item);
     const bookDom = utils.createDOMFromHTML(book);
     listBook.appendChild(bookDom);
     console.log('show listBook', listBook);
   }
 }
+
+function determineRatingBgc(rating) {
+  let ratingBackground = '';
+  if(rating < 6){
+    ratingBackground = 'background: linear-gradient(to bottom,  #fefcea 0%, #f1da36 100%)';
+
+  } else if (rating > 6 && rating <= 8){
+    ratingBackground = 'background: linear-gradient(to bottom, #b4df5b 0%,#b4df5b 100%)';
+  } else if (rating > 8 && rating <= 9){
+    ratingBackground = 'background: linear-gradient(to bottom, #299a0b 0%, #299a0b 100%)';
+  } else if (rating > 9){
+    ratingBackground = 'background: linear-gradient(to bottom, #ff0084 0%,#ff0084 100%)';
+  }
+  return ratingBackground;
+}
+
 
 render();
 
